@@ -1,0 +1,16 @@
+[
+    {
+      "name": "",
+      "email": "@gmail.com",
+      "durations": "一學年",
+      "projects": ["xxx", "yyy"],
+      "core_or_not": true
+    },
+    {
+      "name": "",
+      "email": "@gmail.com",
+      "durations": "一學年",
+      "projects": [],
+      "core_or_not": false
+    }
+]

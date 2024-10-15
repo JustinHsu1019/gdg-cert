@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <title>上傳證書資料</title>
+</head>
+
+<body>
+    <input type="file" id="fileInput">
+    <button onclick="submitData()">提交資料</button>
+    <script>
+        function submitData() {
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length === 0) {
+                alert('請選擇一個文件');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const data = JSON.parse(event.target.result);
+                fetch('http://127.0.0.1:5000/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }).then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Something went wrong');
+                }).then(data => {
+                    const hashId = data.hash_id;
+                    const pdfUrl = data.pdf_url;
+                    window.open(`http://127.0.0.1:5000/certs/${hashId}`, '_blank');
+                    window.location.href = `http://127.0.0.1:5000${pdfUrl}`;
+                }).catch(error => console.error('Error:', error));
+            };
+
+            reader.readAsText(file);
+        }
+    </script>
+
+</body>
+
+</html>

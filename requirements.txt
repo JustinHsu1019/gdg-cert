@@ -1,0 +1,6 @@
+firebase_admin==6.5.0
+Flask==2.3.2
+Flask_Cors==4.0.0
+google_api_python_client==2.147.0
+Pillow==10.4.0
+protobuf==5.28.2
